@@ -20,8 +20,8 @@
 
   <div class="container">
     <div class="board">
-      <div *ngFor="let r of board;" class="row">
-        <div class="cell" *ngFor="let c of r;" (click)="cellClick($event)"></div>
+      <div *ngFor="let r of board; let i = index" class="row">
+        <div class="cell" *ngFor="let c of r;let j = index" (click)="cellClick(i, j)">{{c}}</div>
       </div>
     </div>
 

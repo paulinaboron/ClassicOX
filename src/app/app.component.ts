@@ -11,7 +11,7 @@ export class AppComponent {
   maxScore = 10;
   width = 10;
   height = 10;
-  board: Array<Array<number>> = [];
+  board: Array<Array<string>> = [];
 
   constructor(){
     this.createBoard(this.width, this.height);
@@ -20,20 +20,13 @@ export class AppComponent {
   createBoard(w: number, h: number){
     this.board = [];
     for(let i = 0; i < h; i++){
-      this.board.push(new Array(w).fill(0));
+      this.board.push(new Array(w).fill(""));
     }
   }
 
-  createRange(number: number){
-    return new Array(number).fill(0)
-      .map((n, index) => index + 1);
-  }
-
-  cellClick(event: MouseEvent){
-    console.log('cell clicked', event);
-    if(event.target instanceof HTMLElement){
-      event.target.innerText = 'O';
-    }
+  cellClick(i: number, j: number){
+    console.log('cell clicked', i, j);
+    if(this.board[i][j] == "") this.board[i][j] = "O";
   }
 
   save(w: string, h: string, s: string){

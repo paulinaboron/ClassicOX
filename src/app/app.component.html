@@ -3,6 +3,7 @@
 
   <span>{{ title }}</span>
   <div class="spacer"></div>
+  <span id="compScore">Computers score: {{ compScore }} / {{ maxScore }}</span>
   <span>Your score: {{ score }} / {{ maxScore }}</span>
 
 </div>
@@ -21,14 +22,14 @@
   <div class="container">
     <div class="board">
       <div *ngFor="let r of board; let i = index" class="row">
-        <div class="cell" *ngFor="let c of r;let j = index" (click)="cellClick(i, j)">{{c}}</div>
+        <div *ngFor="let c of r;let j = index" (click)="cellClick(i, j)" class="cell {{c}}">{{c}}</div>
       </div>
     </div>
 
     <div class="menu">
-      <input type="number" #widthInput placeholder="Width" class="card" />
-      <input type="number" #heightInput placeholder="Height" class="card" />
-      <input type="number" #scoreInput placeholder="Score" class="card" />
+      <input type="number" #widthInput placeholder="Width" class="card" min="1" max="20" />
+      <input type="number" #heightInput placeholder="Height" class="card" min="1" max="20"/>
+      <input type="number" #scoreInput placeholder="Score" class="card" min="1" max="20"/>
       <button id="save" (click)="save(widthInput.value, heightInput.value, scoreInput.value)" class="card">Save</button>
       <button id="restart" (click)="restart()" class="card">Restart</button>
     </div>

@@ -13,6 +13,7 @@ export class AppComponent {
   width = 10;
   height = 10;
   board: Array<Array<string>> = [];
+  winner: string = "";
 
   constructor(){
     this.createBoard(this.width, this.height);
@@ -31,6 +32,7 @@ export class AppComponent {
 
     if(this.checkForFive(this.board, "O")){
       this.score++;
+      this.checkForWinner();
     }
 
     this.compMove()
@@ -47,10 +49,12 @@ export class AppComponent {
 
   restart(){
     this.score = 0;
+    this.compScore = 0;
     this.maxScore = 10;
     this.width = 10;
     this.height = 10;
     this.createBoard(this.width, this.height);
+    this.winner = "";
   }
 
   compMove(){
@@ -60,6 +64,7 @@ export class AppComponent {
           this.board[i][j] = "X";
           if(this.checkForFive(this.board, "X")){
             this.compScore++;
+            this.checkForWinner();
           }
           return;
         }
@@ -126,5 +131,16 @@ export class AppComponent {
   }
 
   return false;
+  }
+
+  checkForWinner(){
+    if(this.score >= this.maxScore){
+      this.winner = "You win!";
+    }
+    else if(this.compScore >= this.maxScore){
+      this.winner = "Computer wins!";
+    }
+    console.log(this.winner);
+    
   }
 }
